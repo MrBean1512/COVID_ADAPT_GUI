@@ -3,16 +3,19 @@ import tkinter.font
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
 
-def window_Start(parent):
+def window_Start():
 
     # define the main frame/window
-    window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
-    window.pack(fill=BOTH, expand=1)
+    #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
+    #window.pack(fill=BOTH, expand=1)
+
+    tk = tkinter.Tk()
+    tk.title("COVID ADAPT")
 
     # ==========================================================
     # define the right frame
     # this is where information is displayed
-    rightFrame = tkinter.Frame(window, relief = RIDGE, borderwidth = 2)
+    rightFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
     rightFrame.pack(side = RIGHT)
 
     # define the Title label
@@ -22,7 +25,7 @@ def window_Start(parent):
     # ==========================================================
     # define the left frame
     # this is where the start page buttons should be held
-    leftFrame = tkinter.Frame(window, relief = RIDGE, borderwidth = 2)
+    leftFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
     leftFrame.pack(side = LEFT)
 
     # button format
@@ -55,5 +58,8 @@ def window_Start(parent):
     buttonRecentSim.pack(side = TOP)
 
     # define the exit button
-    button = tkinter.Button(leftFrame, text = "Exit", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = parent.destroy)
+    button = tkinter.Button(leftFrame, text = "Exit", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = tk.destroy)
     button.pack(side = BOTTOM)
+
+    # display the tkinter window
+    tk.mainloop()
