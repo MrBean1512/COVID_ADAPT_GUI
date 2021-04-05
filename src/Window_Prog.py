@@ -1,10 +1,10 @@
-import Window_Prog
 import tkinter
 import tkinter.font
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
+import os
 
-def window_Start():
+def window_Prog():
 
     # define the main frame/window
     #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
@@ -36,28 +36,28 @@ def window_Start():
 
     # define the new button
     def onClickNewSim():
-        title.config(text = "New Sim")
-    buttonNewSim = tkinter.Button(leftFrame, text = "New Sim", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickNewSim)
+        title.config(text = "Run Simulation")
+        os.system('"C:/Windows/System32/notepad.exe"')
+    buttonNewSim = tkinter.Button(leftFrame, text = "Run Simulation", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickNewSim)
     buttonNewSim.pack(side = TOP)
 
     # define the open button
     def onClickOpenSim():
-        title.config(text = "Open Sim")
-        file = askopenfile(mode ='r', filetypes =[('Python Files', '*.txt')])
-        if file is not None:
-            content = file.read()
-            print(content)
-            title.config(text = content)
-        tk.destroy()
-        Window_Prog.window_Prog()
+        title.config(text = "Export")
 
-    buttonOpenSim = tkinter.Button(leftFrame, text = "Open Sim", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickOpenSim)
+    buttonOpenSim = tkinter.Button(leftFrame, text = "Export", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickOpenSim)
     buttonOpenSim.pack(side = TOP)
 
     # define the recent button
     def onClickRecentSim():
-        title.config(text = "Recent Sim")
-    buttonRecentSim = tkinter.Button(leftFrame, text = "Recent Sims", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
+        title.config(text = "Settings")
+    buttonRecentSim = tkinter.Button(leftFrame, text = "Settings", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
+    buttonRecentSim.pack(side = TOP)
+
+    # define the recent button
+    def onClickRecentSim():
+        title.config(text = "Edit Room")
+    buttonRecentSim = tkinter.Button(leftFrame, text = "Edit Room", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
     buttonRecentSim.pack(side = TOP)
 
     # define the exit button
