@@ -1,8 +1,9 @@
 import tkinter
 import tkinter.font
-from tkinter.constants import *
-from tkinter.filedialog import askopenfile
-import os
+from tkinter.constants import * # used for formatting
+from tkinter.filedialog import askopenfile  # used to open a file
+import os   # used for running an exe
+import Window_Settings
 
 def window_Prog():
 
@@ -51,6 +52,7 @@ def window_Prog():
     # define the recent button
     def onClickRecentSim():
         title.config(text = "Settings")
+        Window_Settings.window_Settings()
     buttonRecentSim = tkinter.Button(leftFrame, text = "Settings", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
     buttonRecentSim.pack(side = TOP)
 
