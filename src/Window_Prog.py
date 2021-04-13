@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.font
+import Button_Builder
 from tkinter.constants import * # used for formatting
 from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
@@ -30,41 +31,33 @@ def window_Prog():
     leftFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
     leftFrame.pack(side = LEFT)
 
-    # button format
-    buttonFont = tkinter.font.Font(family = "Helvetica", size = 16)
-    buttonWidth = 20
-    buttonJustify = "left"
-
     # define the new button
-    def onClickNewSim():
+    def run():
         title.config(text = "Run Simulation")
         os.system('"C:/Windows/System32/notepad.exe"')
-    buttonNewSim = tkinter.Button(leftFrame, text = "Run Simulation", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickNewSim)
-    buttonNewSim.pack(side = TOP)
 
     # define the open button
-    def onClickOpenSim():
+    def export():
         title.config(text = "Export")
 
-    buttonOpenSim = tkinter.Button(leftFrame, text = "Export", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickOpenSim)
-    buttonOpenSim.pack(side = TOP)
-
     # define the recent button
-    def onClickRecentSim():
+    def settings():
         title.config(text = "Settings")
         Window_Settings.window_Settings()
-    buttonRecentSim = tkinter.Button(leftFrame, text = "Settings", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
-    buttonRecentSim.pack(side = TOP)
 
     # define the recent button
-    def onClickRecentSim():
+    def edit():
         title.config(text = "Edit Room")
-    buttonRecentSim = tkinter.Button(leftFrame, text = "Edit Room", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
-    buttonRecentSim.pack(side = TOP)
 
-    # define the exit button
-    button = tkinter.Button(leftFrame, text = "Exit", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = tk.destroy)
-    button.pack(side = BOTTOM)
+    buttonSpecs = [
+        #["name", function],
+        ["Run Simulation", run],
+        ["Export", export],
+        ["Settings", settings],
+        ["Edit Room", edit],
+    ]
+
+    Button_Builder.buttonBuilder(leftFrame, buttonSpecs)
 
     # display the tkinter window
     tk.mainloop()

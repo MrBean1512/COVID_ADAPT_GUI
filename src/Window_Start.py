@@ -1,6 +1,8 @@
 import Window_Prog
+import Button_Builder
 import tkinter
 import tkinter.font
+from PIL import Image, ImageTk
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
 
@@ -16,32 +18,42 @@ def window_Start():
     # ==========================================================
     # define the right frame
     # this is where information is displayed
-    rightFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
+    rightFrame = tkinter.Frame(tk, borderwidth = 2)
     rightFrame.pack(side = RIGHT)
 
     # define the Title label
-    title = tkinter.Label(rightFrame, text = "Get Started")
+    title = tkinter.Label(rightFrame, text = "Welcome")
     title.pack(fill = X, expand = 1)
+
+    # define the Paragraph label
+    title = tkinter.Label(rightFrame, justify = LEFT, text = 
+    "Thanks for reading this but there's no \n"
+     "need to continue looking at this part. \n"
+     "People reading my work makes me genuinely \n"
+     "uncomfortable. No more, thx.")
+    title.pack(fill = X, expand = 1)
+
+    # define the Title label
+    imgFile = Image.open("C:\\Users\\mrbea\\Documents\\Whitworth-Visual-Studio\\COVID_ADAPT_GUI\\COVID_ADAPT_GUI\\src\\assets\\scientisthdpi.png")
+    imgFile = imgFile.resize((300,250))
+    render = ImageTk.PhotoImage(imgFile)
+    img = tkinter.Label(rightFrame, image = render)
+    img.image = render
+    img.pack(fill = X, expand = 1)
 
     # ==========================================================
     # define the left frame
     # this is where the start page buttons should be held
-    leftFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
+    leftFrame = tkinter.Frame(tk, width = 300, height = 300, borderwidth = 2)
+    leftFrame.pack_propagate(0)
     leftFrame.pack(side = LEFT)
 
-    # button format
-    buttonFont = tkinter.font.Font(family = "Helvetica", size = 16)
-    buttonWidth = 20
-    buttonJustify = "left"
-
-    # define the new button
-    def onClickNewSim():
+    # define the new button's function
+    def newSim():
         title.config(text = "New Sim")
-    buttonNewSim = tkinter.Button(leftFrame, text = "New Sim", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickNewSim)
-    buttonNewSim.pack(side = TOP)
 
-    # define the open button
-    def onClickOpenSim():
+    # define the open button's function
+    def openSim():
         title.config(text = "Open Sim")
         file = askopenfile(mode ='r', filetypes =[('Python Files', '*.txt')])
         if file is not None:
@@ -51,18 +63,19 @@ def window_Start():
         tk.destroy()
         Window_Prog.window_Prog()
 
-    buttonOpenSim = tkinter.Button(leftFrame, text = "Open Sim", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickOpenSim)
-    buttonOpenSim.pack(side = TOP)
-
-    # define the recent button
-    def onClickRecentSim():
+    # define the recent button's function
+    def recentSim():
         title.config(text = "Recent Sim")
-    buttonRecentSim = tkinter.Button(leftFrame, text = "Recent Sims", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = onClickRecentSim)
-    buttonRecentSim.pack(side = TOP)
 
-    # define the exit button
-    button = tkinter.Button(leftFrame, text = "Exit", font = buttonFont, width = buttonWidth, justify = buttonJustify, command = tk.destroy)
-    button.pack(side = BOTTOM)
+
+    buttonSpecs = [
+        #["name", function],
+        ["New Sim", newSim],
+        ["Open Sim", openSim],
+        ["Recent Sim", recentSim],
+    ]
+
+    Button_Builder.buttonBuilder(leftFrame, buttonSpecs)
 
     # display the tkinter window
     tk.mainloop()
