@@ -29,12 +29,13 @@ def window_Start():
     title = tkinter.Label(rightFrame, justify = LEFT, text = 
     "Thanks for reading this but there's no \n"
      "need to continue looking at this part. \n"
-     "People reading my work makes me genuinely \n"
-     "uncomfortable. No more, thx.")
+     "Wodododj dhds fsshdgsy sdyfgsyd bgsdy \n"
+     "sdhdfudfh jsidfdsifi ajus. dhdbfhydbh \n"
+     "dsduhdu hduhfu sisu dudhud hsudu hsuh \n")
     title.pack(fill = X, expand = 1)
 
     # define the Title label
-    imgFile = Image.open("C:\\Users\\mrbea\\Documents\\Whitworth-Visual-Studio\\COVID_ADAPT_GUI\\COVID_ADAPT_GUI\\src\\assets\\scientisthdpi.png")
+    imgFile = Image.open("src\\assets\\scientisthdpi.png")
     imgFile = imgFile.resize((300,250))
     render = ImageTk.PhotoImage(imgFile)
     img = tkinter.Label(rightFrame, image = render)
