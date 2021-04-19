@@ -1,10 +1,13 @@
+import Window_NewSim
 import Window_Prog
 import Button_Builder
 import tkinter
 import tkinter.font
 from PIL import Image, ImageTk
+import os
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
+from tkinter.filedialog import asksaveasfile
 
 def window_Start():
 
@@ -52,6 +55,7 @@ def window_Start():
     # define the new button's function
     def newSim():
         title.config(text = "New Sim")
+        Window_NewSim.window_NewSim()
 
     # define the open button's function
     def openSim():
