@@ -1,5 +1,6 @@
 # settings window which is accessed through the main window under open sim
-import tkinter
+import Window_Prog
+import tkinter 
 import tkinter.font
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
@@ -69,9 +70,8 @@ def window_NewSim():
         with open(fileName, "w") as f:
             f.write(str(info))
 
-        #outFile = open("src\\bin\\"+entries[0].get()+"\\projectInfo.json", "w")
-        #outFile.write(json.dumps(info))
-        #outFile.close()
+        tk.destroy()
+        Window_Prog.window_Prog()
 
     saveButton = tkinter.Button(bottomFrame, text = "Create New", command = saveSettings)
     saveButton.pack(side = BOTTOM)
