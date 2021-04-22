@@ -1,10 +1,14 @@
+import Window_NewSim
 import Window_Prog
 import Button_Builder
 import tkinter
 import tkinter.font
 from PIL import Image, ImageTk
+import os
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
+from tkinter.filedialog import asksaveasfile
+from tkinter.filedialog import askdirectory
 
 def window_Start():
 
@@ -29,12 +33,13 @@ def window_Start():
     title = tkinter.Label(rightFrame, justify = LEFT, text = 
     "Thanks for reading this but there's no \n"
      "need to continue looking at this part. \n"
-     "People reading my work makes me genuinely \n"
-     "uncomfortable. No more, thx.")
+     "Wodododj dhds fsshdgsy sdyfgsyd bgsdy \n"
+     "sdhdfudfh jsidfdsifi ajus. dhdbfhydbh \n"
+     "dsduhdu hduhfu sisu dudhud hsudu hsuh \n")
     title.pack(fill = X, expand = 1)
 
     # define the Title label
-    imgFile = Image.open("./src/assets/scientisthdpi.png")
+    imgFile = Image.open("src\\assets\\scientisthdpi.png")
     imgFile = imgFile.resize((300,250))
     render = ImageTk.PhotoImage(imgFile)
     img = tkinter.Label(rightFrame, image = render)
@@ -51,17 +56,21 @@ def window_Start():
     # define the new button's function
     def newSim():
         title.config(text = "New Sim")
+        Window_NewSim.window_NewSim(tk)
+        
 
     # define the open button's function
     def openSim():
         title.config(text = "Open Sim")
-        file = askopenfile(mode ='r', filetypes =[('Python Files', '*.txt')])
-        if file is not None:
-            content = file.read()
-            print(content)
-            title.config(text = content)
+        folder = askdirectory()
+        #file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
+        #if file is not None:
+        #    content = file.read()
+        #    print(content)
+        #    title.config(text = content)
         tk.destroy()
-        Window_Prog.window_Prog()
+        print(folder)
+        Window_Prog.window_Prog(folder)
 
     # define the recent button's function
     def recentSim():
