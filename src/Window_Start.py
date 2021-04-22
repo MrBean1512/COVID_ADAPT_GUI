@@ -34,7 +34,7 @@ def window_Start():
     title.pack(fill = X, expand = 1)
 
     # define the Title label
-    imgFile = Image.open("C:\\Users\\mrbea\\Documents\\Whitworth-Visual-Studio\\COVID_ADAPT_GUI\\COVID_ADAPT_GUI\\src\\assets\\scientisthdpi.png")
+    imgFile = Image.open("./src/assets/scientisthdpi.png")
     imgFile = imgFile.resize((300,250))
     render = ImageTk.PhotoImage(imgFile)
     img = tkinter.Label(rightFrame, image = render)

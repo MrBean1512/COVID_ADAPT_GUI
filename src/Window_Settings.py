@@ -144,7 +144,7 @@ def window_Settings():
             settings[entry.variableName] = entry.get() 
 
         outFile = open("settings.json", "w")
-        outFile.write(json.dumps(settings))
+        outFile.write(json.dumps(settings, indent = 0))
         outFile.close()
 
     saveButton = tkinter.Button(bottomFrame, text = "Save Settings", command = saveSettings)
@@ -158,8 +158,23 @@ def window_Settings():
             entry.insert(0, entry.default)
         saveSettings()
 
+    # read settings from JSON file and display in the text entry forms
+    # to be used when the window is opened
+    def readSettings():
+        # read settings file into a map
+        with open("./settings.json") as f:
+            settingsIn = json.load(f)
+        
+        for entry in entries:
+            entry.delete(0, END)
+            entry.insert(0, settingsIn[entry.variableName])
+
     defaultButton = tkinter.Button(bottomFrame, text = "Set Default Values", command = setAsDefaults)
     defaultButton.pack(side = BOTTOM)
 
+
+    #inialize display of settings
+    readSettings()
+    
     # display the window
     tk.mainloop()
