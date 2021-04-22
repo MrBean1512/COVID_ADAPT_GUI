@@ -8,6 +8,7 @@ import os
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
+from tkinter.filedialog import askdirectory
 
 def window_Start():
 
@@ -55,19 +56,21 @@ def window_Start():
     # define the new button's function
     def newSim():
         title.config(text = "New Sim")
-        Window_NewSim.window_NewSim()
+        Window_NewSim.window_NewSim(tk)
         
 
     # define the open button's function
     def openSim():
         title.config(text = "Open Sim")
-        file = askopenfile(mode ='r', filetypes =[('Python Files', '*.txt')])
-        if file is not None:
-            content = file.read()
-            print(content)
-            title.config(text = content)
+        folder = askdirectory()
+        #file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
+        #if file is not None:
+        #    content = file.read()
+        #    print(content)
+        #    title.config(text = content)
         tk.destroy()
-        Window_Prog.window_Prog()
+        print(folder)
+        Window_Prog.window_Prog(folder)
 
     # define the recent button's function
     def recentSim():

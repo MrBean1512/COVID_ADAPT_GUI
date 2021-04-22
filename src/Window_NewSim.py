@@ -15,7 +15,7 @@ class settingEntry(tkinter.Entry):
         self.variableName = "unnamed"
         self.default = ""
 
-def window_NewSim():
+def window_NewSim(parent):
     tk = tkinter.Tk()
     tk.title("COVID ADAPT")
 
@@ -58,20 +58,22 @@ def window_NewSim():
         for entry in entries:
             info[entry.variableName] = entry.get()
         print(entries[0].get())
-
-
-        fileName = "bin\\"+entries[0].get()+"\\projectInfo.json"
-        if not os.path.exists(os.path.dirname(fileName)):
+        
+        # make a new folder in the saves folder
+        fileName = entries[0].get()
+        filePath = "saves\\" + fileName + "\\projectInfo.json"
+        if not os.path.exists(os.path.dirname(filePath)):
             try:
-                os.makedirs(os.path.dirname(fileName))
+                os.makedirs(os.path.dirname(filePath))
             except OSError as exc: # Guard against race condition
                 if exc.errno != errno.EEXIST:
                     raise
-        with open(fileName, "w") as f:
+        with open(filePath, "w") as f:
             f.write(str(info))
 
         tk.destroy()
-        Window_Prog.window_Prog()
+        parent.destroy()
+        Window_Prog.window_Prog(os.getcwd() + "\\saves\\" + fileName)
 
     saveButton = tkinter.Button(bottomFrame, text = "Create New", command = saveSettings)
     saveButton.pack(side = BOTTOM)

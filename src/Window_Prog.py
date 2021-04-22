@@ -6,7 +6,7 @@ from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
 import Window_Settings
 
-def window_Prog():
+def window_Prog(folderDirectory):
 
     # define the main frame/window
     #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
