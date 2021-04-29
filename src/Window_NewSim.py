@@ -15,46 +15,48 @@ class settingEntry(tkinter.Entry):
         self.variableName = "unnamed"
         self.default = ""
 
-def window_NewSim(parent):
-    tk = tkinter.Tk()
-    tk.title("COVID ADAPT")
+def window_NewSim(rightFrame, leftFrame, parent):
+    
+    # main frame for the new sim function
+    newSim = tkinter.Frame(parent)
+    newSim.pack(side = TOP)
 
     # top frame holds left and right frames
-    topFrame = tkinter.Frame(tk)
+    topFrame = tkinter.Frame(newSim)
     topFrame.pack(side = TOP)
 
     # left frame holds setting names
-    leftFrame = tkinter.Frame(topFrame)
-    leftFrame.pack(side = LEFT)
+    labelFrame = tkinter.Frame(topFrame)
+    labelFrame.pack(side = LEFT)
 
     # right frame holds setting entry boxes
-    rightFrame = tkinter.Frame(topFrame)
-    rightFrame.pack(side = RIGHT)
+    entryFrame = tkinter.Frame(topFrame)
+    entryFrame.pack(side = RIGHT)
 
     # bottom frame holds buttons
-    bottomFrame = tkinter.Frame(tk)
+    bottomFrame = tkinter.Frame(newSim)
     bottomFrame.pack(side = BOTTOM)
 
     # define steepness exposure entry
-    labelProjectName = tkinter.Label(leftFrame, text = "Project Name")
+    labelProjectName = tkinter.Label(labelFrame, text = "Project Name")
     labelProjectName.pack(side = TOP)
-    entryProjectName = settingEntry(rightFrame)
+    entryProjectName = settingEntry(entryFrame)
     entryProjectName.variableName = "project_name"
     entryProjectName.default = "New_Project"
     entryProjectName.pack(side = TOP)
 
     # store all entry objects in a list
-    entries = [widget for widget in rightFrame.winfo_children() if isinstance(widget, settingEntry)]
+    entries = [widget for widget in entryFrame.winfo_children() if isinstance(widget, settingEntry)]
 
     # define back  button
     # closes the settings window and returns to the main window
-    backButton = tkinter.Button(bottomFrame, text = "Cancel", command = tk.destroy)
+    backButton = tkinter.Button(bottomFrame, text = "Cancel", command = newSim.destroy)
     backButton.pack(side = BOTTOM)
 
     # define save button
     # the save button creates a map containing every setting and value and outputs the map to a JSON file
     info = {}
-    def saveSettings():
+    def createNewProject():
         for entry in entries:
             info[entry.variableName] = entry.get()
         print(entries[0].get())
@@ -71,12 +73,13 @@ def window_NewSim(parent):
         with open(filePath, "w") as f:
             f.write(str(info))
 
-        tk.destroy()
-        parent.destroy()
-        Window_Prog.window_Prog(os.getcwd() + "\\saves\\" + fileName)
+        leftFrame.destroy()
+        rightFrame.destroy()
+        newSim.destroy()
+        Window_Prog.window_Prog(parent, (os.getcwd() + "\\saves\\" + fileName) )
 
-    saveButton = tkinter.Button(bottomFrame, text = "Create New", command = saveSettings)
+    saveButton = tkinter.Button(bottomFrame, text = "Create New", command = createNewProject)
     saveButton.pack(side = BOTTOM)
 
     # display the window
-    tk.mainloop()
+    parent.mainloop()

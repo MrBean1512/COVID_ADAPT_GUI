@@ -56,7 +56,7 @@ def window_Start():
     # define the new button's function
     def newSim():
         title.config(text = "New Sim")
-        Window_NewSim.window_NewSim(tk)
+        Window_NewSim.window_NewSim(leftFrame, rightFrame, tk)
         
 
     # define the open button's function

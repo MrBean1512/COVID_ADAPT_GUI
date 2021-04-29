@@ -6,19 +6,19 @@ from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
 import Window_Settings
 
-def window_Prog(folderDirectory):
+def window_Prog(parent, folderDirectory):
 
     # define the main frame/window
     #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
     #window.pack(fill=BOTH, expand=1)
 
-    tk = tkinter.Tk()
-    tk.title("COVID ADAPT")
+    #tk = tkinter.Tk()
+    #tk.title("COVID ADAPT")
 
     # ==========================================================
     # define the right frame
     # this is where information is displayed
-    rightFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
+    rightFrame = tkinter.Frame(parent, relief = RIDGE, borderwidth = 2)
     rightFrame.pack(side = RIGHT)
 
     # define the Title label
@@ -28,7 +28,7 @@ def window_Prog(folderDirectory):
     # ==========================================================
     # define the left frame
     # this is where the start page buttons should be held
-    leftFrame = tkinter.Frame(tk, relief = RIDGE, borderwidth = 2)
+    leftFrame = tkinter.Frame(parent, relief = RIDGE, borderwidth = 2)
     leftFrame.pack(side = LEFT)
 
     # define the new button
@@ -60,4 +60,4 @@ def window_Prog(folderDirectory):
     Button_Builder.buttonBuilder(leftFrame, buttonSpecs)
 
     # display the tkinter window
-    tk.mainloop()
+    parent.mainloop()
