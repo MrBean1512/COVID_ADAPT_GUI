@@ -4,7 +4,7 @@ import tkinter.font
 from tkinter.constants import *
 from tkinter.filedialog import askopenfile
 import json
-import Button_Builder
+import Frame_Buttons
 
 # subclass of Entry that holds the name of the variable in the settings file that the entry corresponds with
 class settingEntry(tkinter.Entry):
@@ -14,12 +14,12 @@ class settingEntry(tkinter.Entry):
         self.default = ""
         self.type = int
 
-def window_Settings():
-    tk = tkinter.Tk()
-    tk.title("COVID ADAPT")
+def settings(mainFrame):
+    settingsFrame = tkinter.Frame(mainFrame)
+    settingsFrame.pack(side = RIGHT)
 
     # top frame holds left and right frames
-    topFrame = tkinter.Frame(tk)
+    topFrame = tkinter.Frame(settingsFrame)
     topFrame.pack(side = TOP)
 
     # left frame holds setting names
@@ -31,7 +31,7 @@ def window_Settings():
     rightFrame.pack(side = RIGHT)
 
     # bottom frame holds buttons
-    bottomFrame = tkinter.Frame(tk)
+    bottomFrame = tkinter.Frame(settingsFrame)
     bottomFrame.pack(side = BOTTOM)
 
     # define steepness exposure entry
@@ -196,17 +196,12 @@ def window_Settings():
 
     buttonSpecs = [
         #["name", function],
-        ["Return To Menu", tk.destroy],
+        #["Return To Menu", tk.destroy],
         ["Save Settings", saveSettings],
         ["Set Default Values", setAsDefaults],
     ]
 
-    Button_Builder.buttonBuilder(bottomFrame, buttonSpecs)
-
-
+    Frame_Buttons.buttonBuilder(bottomFrame, buttonSpecs)
 
     #inialize display of settings
     readSettings()
-    
-    # display the window
-    tk.mainloop()

@@ -1,12 +1,12 @@
 import tkinter
 import tkinter.font
-import Button_Builder
+import Frame_Buttons
 from tkinter.constants import * # used for formatting
 from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
-import Window_Settings
+import Settings
 
-def window_Prog(parent, folderDirectory):
+def simulation(mainFrame, folderDirectory):
 
     # define the main frame/window
     #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
@@ -18,7 +18,7 @@ def window_Prog(parent, folderDirectory):
     # ==========================================================
     # define the right frame
     # this is where information is displayed
-    rightFrame = tkinter.Frame(parent, relief = RIDGE, borderwidth = 2)
+    rightFrame = tkinter.Frame(mainFrame, relief = RIDGE, borderwidth = 2)
     rightFrame.pack(side = RIGHT)
 
     # define the Title label
@@ -28,7 +28,7 @@ def window_Prog(parent, folderDirectory):
     # ==========================================================
     # define the left frame
     # this is where the start page buttons should be held
-    leftFrame = tkinter.Frame(parent, relief = RIDGE, borderwidth = 2)
+    leftFrame = tkinter.Frame(mainFrame, relief = RIDGE, borderwidth = 2)
     leftFrame.pack(side = LEFT)
 
     # define the new button
@@ -42,8 +42,8 @@ def window_Prog(parent, folderDirectory):
 
     # define the recent button
     def settings():
-        title.config(text = "Settings")
-        Window_Settings.window_Settings()
+        rightFrame.destroy()
+        Settings.settings(mainFrame)
 
     # define the recent button
     def edit():
@@ -57,7 +57,7 @@ def window_Prog(parent, folderDirectory):
         ["Edit Room", edit],
     ]
 
-    Button_Builder.buttonBuilder(leftFrame, buttonSpecs)
+    Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)
 
     # display the tkinter window
-    parent.mainloop()
+    mainFrame.mainloop()

@@ -1,5 +1,5 @@
 # settings window which is accessed through the main window under open sim
-import Window_Prog
+import Simulation
 import tkinter 
 import tkinter.font
 from tkinter.constants import *
@@ -15,14 +15,14 @@ class settingEntry(tkinter.Entry):
         self.variableName = "unnamed"
         self.default = ""
 
-def window_NewSim(rightFrame, leftFrame, parent):
-    
+def newSim(mainFrame, leftFrame, rightFrame):
+
     # main frame for the new sim function
-    newSim = tkinter.Frame(parent)
-    newSim.pack(side = TOP)
+    newSimFrame = tkinter.Frame(rightFrame)
+    newSimFrame.pack(side = TOP)
 
     # top frame holds left and right frames
-    topFrame = tkinter.Frame(newSim)
+    topFrame = tkinter.Frame(newSimFrame)
     topFrame.pack(side = TOP)
 
     # left frame holds setting names
@@ -34,7 +34,7 @@ def window_NewSim(rightFrame, leftFrame, parent):
     entryFrame.pack(side = RIGHT)
 
     # bottom frame holds buttons
-    bottomFrame = tkinter.Frame(newSim)
+    bottomFrame = tkinter.Frame(newSimFrame)
     bottomFrame.pack(side = BOTTOM)
 
     # define steepness exposure entry
@@ -50,7 +50,9 @@ def window_NewSim(rightFrame, leftFrame, parent):
 
     # define back  button
     # closes the settings window and returns to the main window
-    backButton = tkinter.Button(bottomFrame, text = "Cancel", command = newSim.destroy)
+    def cancel():
+        newSimFrame.destroy()
+    backButton = tkinter.Button(bottomFrame, text = "Cancel", command = cancel)
     backButton.pack(side = BOTTOM)
 
     # define save button
@@ -75,11 +77,10 @@ def window_NewSim(rightFrame, leftFrame, parent):
 
         leftFrame.destroy()
         rightFrame.destroy()
-        newSim.destroy()
-        Window_Prog.window_Prog(parent, (os.getcwd() + "\\saves\\" + fileName) )
+        Simulation.simulation(mainFrame, (os.getcwd() + "\\saves\\" + fileName) )
 
     saveButton = tkinter.Button(bottomFrame, text = "Create New", command = createNewProject)
-    saveButton.pack(side = BOTTOM)
+    saveButton.pack(side = LEFT)
 
     # display the window
-    parent.mainloop()
+    mainFrame.mainloop()
