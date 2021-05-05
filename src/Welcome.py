@@ -1,6 +1,6 @@
-import Window_NewSim
-import Window_Prog
-import Button_Builder
+import NewSim
+import Simulation
+import Frame_Buttons
 import tkinter
 import tkinter.font
 from PIL import Image, ImageTk
@@ -10,33 +10,26 @@ from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
 from tkinter.filedialog import askdirectory
 
-def window_Start():
-
-    # define the main frame/window
-    #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
-    #window.pack(fill=BOTH, expand=1)
-
-    tk = tkinter.Tk()
-    tk.title("COVID ADAPT")
+def welcome(mainFrame):
 
     # ==========================================================
     # define the right frame
     # this is where information is displayed
-    rightFrame = tkinter.Frame(tk, borderwidth = 2)
+    rightFrame = tkinter.Frame(mainFrame, borderwidth = 2)
     rightFrame.pack(side = RIGHT)
 
-    # define the Title label
-    title = tkinter.Label(rightFrame, text = "Welcome")
-    title.pack(fill = X, expand = 1)
-
     # define the Paragraph label
-    title = tkinter.Label(rightFrame, justify = LEFT, text = 
+    paragraph = tkinter.Label(rightFrame, justify = LEFT, text = 
     "Thanks for reading this but there's no \n"
      "need to continue looking at this part. \n"
      "Wodododj dhds fsshdgsy sdyfgsyd bgsdy \n"
      "sdhdfudfh jsidfdsifi ajus. dhdbfhydbh \n"
      "dsduhdu hduhfu sisu dudhud hsudu hsuh \n")
-    title.pack(fill = X, expand = 1)
+    paragraph.pack(side = BOTTOM)
+
+    # define the Title label
+    title = tkinter.Label(rightFrame, text = "Welcome")
+    title.pack(side = BOTTOM)
 
     # define the Title label
     imgFile = Image.open("src\\assets\\scientisthdpi.png")
@@ -44,33 +37,32 @@ def window_Start():
     render = ImageTk.PhotoImage(imgFile)
     img = tkinter.Label(rightFrame, image = render)
     img.image = render
-    img.pack(fill = X, expand = 1)
+    img.pack(side = BOTTOM)
 
     # ==========================================================
     # define the left frame
     # this is where the start page buttons should be held
-    leftFrame = tkinter.Frame(tk, width = 300, height = 300, borderwidth = 2)
+    leftFrame = tkinter.Frame(mainFrame, width = 300, height = 300, borderwidth = 2)
     leftFrame.pack_propagate(0)
     leftFrame.pack(side = LEFT)
 
     # define the new button's function
     def newSim():
-        title.config(text = "New Sim")
-        Window_NewSim.window_NewSim(tk)
-        
+        NewSim.newSim(mainFrame, leftFrame, rightFrame)
 
     # define the open button's function
     def openSim():
         title.config(text = "Open Sim")
         folder = askdirectory()
-        #file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
-        #if file is not None:
-        #    content = file.read()
-        #    print(content)
-        #    title.config(text = content)
-        tk.destroy()
-        print(folder)
-        Window_Prog.window_Prog(folder)
+        file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
+        if file is not None:
+            leftFrame.destroy
+            rightFrame.destroy
+            print(folder)
+            Simulation.simulation(mainFrame, folder)
+        else:
+            print("invalid selection")
+        
 
     # define the recent button's function
     def recentSim():
@@ -84,7 +76,4 @@ def window_Start():
         ["Recent Sim", recentSim],
     ]
 
-    Button_Builder.buttonBuilder(leftFrame, buttonSpecs)
-
-    # display the tkinter window
-    tk.mainloop()
+    Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)
