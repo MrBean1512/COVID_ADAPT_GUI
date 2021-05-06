@@ -9,7 +9,7 @@ window.title("COVID ADAPT")
 mainFrame = tk.Frame(window)
 mainFrame.pack()
 
-Welcome.welcome(mainFrame)
+Welcome.welcome(mainFrame, window)
 
 # display the tkinter window
 window.mainloop()

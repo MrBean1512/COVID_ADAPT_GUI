@@ -1,5 +1,6 @@
 # settings window which is accessed through the main window under open sim
 import Simulation
+from shutil import copy2
 import tkinter 
 import tkinter.font
 from tkinter.constants import *
@@ -18,8 +19,8 @@ class settingEntry(tkinter.Entry):
 def newSim(mainFrame, leftFrame, rightFrame):
 
     # main frame for the new sim function
-    newSimFrame = tkinter.Frame(rightFrame)
-    newSimFrame.pack(side = TOP)
+    newSimFrame = tkinter.Frame(leftFrame)
+    newSimFrame.pack(side = BOTTOM)
 
     # top frame holds left and right frames
     topFrame = tkinter.Frame(newSimFrame)
@@ -75,9 +76,15 @@ def newSim(mainFrame, leftFrame, rightFrame):
         with open(filePath, "w") as f:
             f.write(str(info))
 
+        destination = (os.getcwd() + "\\saves\\" + fileName)
+
+        copy2("src\\assets\\COVID-ADAPT.exe", destination)
+        copy2("src\\assets\\settings.json", destination)
+        copy2("src\\assets\\layout.csv", destination)
+
         leftFrame.destroy()
         rightFrame.destroy()
-        Simulation.simulation(mainFrame, (os.getcwd() + "\\saves\\" + fileName) )
+        Simulation.simulation(mainFrame, destination )
 
     saveButton = tkinter.Button(bottomFrame, text = "Create New", command = createNewProject)
     saveButton.pack(side = LEFT)

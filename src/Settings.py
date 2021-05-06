@@ -14,7 +14,7 @@ class settingEntry(tkinter.Entry):
         self.default = ""
         self.type = int
 
-def settings(mainFrame):
+def settings(mainFrame, folderDirectory):
     settingsFrame = tkinter.Frame(mainFrame)
     settingsFrame.pack(side = RIGHT)
 
@@ -171,7 +171,7 @@ def settings(mainFrame):
                         labelErrorMessage['text'] = str(entry.variableName) + " must be a positive integer value"
 
         if not badInput:
-            outFile = open("settings.json", "w")
+            outFile = open(folderDirectory + "\\settings.json", "w")
             outFile.write(json.dumps(settings, indent = 0))
             outFile.close()
 

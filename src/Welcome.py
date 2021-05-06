@@ -10,7 +10,7 @@ from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
 from tkinter.filedialog import askdirectory
 
-def welcome(mainFrame):
+def welcome(mainFrame, window):
 
     # ==========================================================
     # define the right frame
@@ -54,26 +54,25 @@ def welcome(mainFrame):
     def openSim():
         title.config(text = "Open Sim")
         folder = askdirectory()
-        file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
-        if file is not None:
-            leftFrame.destroy
-            rightFrame.destroy
+        #file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
+        if folder is not None:
+            leftFrame.destroy()
+            rightFrame.destroy()
             print(folder)
             Simulation.simulation(mainFrame, folder)
-        else:
-            print("invalid selection")
+
         
 
     # define the recent button's function
-    def recentSim():
-        title.config(text = "Recent Sim")
+    def exit():
+        window.destroy()
 
 
     buttonSpecs = [
         #["name", function],
         ["New Sim", newSim],
         ["Open Sim", openSim],
-        ["Recent Sim", recentSim],
+        ["Exit", exit],
     ]
 
     Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)
