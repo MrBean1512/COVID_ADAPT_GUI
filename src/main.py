@@ -6,6 +6,8 @@ import Welcome
 window = tk.Tk()
 window.title("COVID ADAPT")
 
+window.iconbitmap('./src/assets/covidAdaptLogo.ico')
+
 mainFrame = tk.Frame(window)
 mainFrame.pack()
 
