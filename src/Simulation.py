@@ -6,6 +6,7 @@ from tkinter.constants import * # used for formatting
 from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
 import Settings
+# import subprocess
 
 def simulation(mainFrame, folderDirectory):
 
@@ -36,8 +37,9 @@ def simulation(mainFrame, folderDirectory):
     def run():
         title.config(text = "Run Simulation")
         os.chdir(folderDirectory)
-        print("working directory updated")
+        print("working directory updated\nrunning simulation...")
         os.system(folderDirectory + '/COVID-ADAPT.exe')
+        # subprocess.run(folderDirectory + '/COVID-ADAPT.exe', capture_output=True)
 
     # define the open button
     def export():
