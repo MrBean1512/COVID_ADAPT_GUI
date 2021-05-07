@@ -1,10 +1,12 @@
 import tkinter
 import tkinter.font
 import Frame_Buttons
+import ExportVideo
 from tkinter.constants import * # used for formatting
 from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
 import Settings
+# import subprocess
 
 def simulation(mainFrame, folderDirectory):
 
@@ -34,16 +36,20 @@ def simulation(mainFrame, folderDirectory):
     # define the new button
     def run():
         title.config(text = "Run Simulation")
-        os.system('"C:/Windows/System32/notepad.exe"')
+        os.chdir(folderDirectory)
+        print("working directory updated\nrunning simulation...")
+        os.system(folderDirectory + '/COVID-ADAPT.exe')
+        # subprocess.run(folderDirectory + '/COVID-ADAPT.exe', capture_output=True)
 
     # define the open button
     def export():
         title.config(text = "Export")
+        ExportVideo.videoGen(folderDirectory)
 
     # define the recent button
     def settings():
         rightFrame.destroy()
-        Settings.settings(mainFrame)
+        Settings.settings(mainFrame, folderDirectory)
 
     # define the recent button
     def edit():
