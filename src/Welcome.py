@@ -20,11 +20,11 @@ def welcome(mainFrame, window):
 
     # define the Paragraph label
     paragraph = tkinter.Label(rightFrame, justify = LEFT, text = 
-    "Thanks for reading this but there's no \n"
-     "need to continue looking at this part. \n"
-     "Wodododj dhds fsshdgsy sdyfgsyd bgsdy \n"
-     "sdhdfudfh jsidfdsifi ajus. dhdbfhydbh \n"
-     "dsduhdu hduhfu sisu dudhud hsudu hsuh \n")
+    "Lorem ipsum dolor sit amet, consectetur \n"
+    "adipiscing elit. Integer vel lacinia \n"
+    "metus. Integer nec feugiat odio. Sed eget\n"
+    "interdum mauris, sed tincidunt erat. Nunc\n"
+    "consequat orci non mi luctus, ut vehicula.\n")
     paragraph.pack(side = BOTTOM)
 
     # define the Title label
