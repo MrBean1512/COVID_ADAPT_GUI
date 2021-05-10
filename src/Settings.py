@@ -88,6 +88,15 @@ def settings(mainFrame, folderDirectory):
     entryVirusDecayRate.type = "decimal"
     entryVirusDecayRate.pack(side = TOP)
 
+    # define vaccine efficacy
+    labelVirusDecayRate = tkinter.Label(leftFrame, text = "Vaccine efficacy")
+    labelVirusDecayRate.pack(side = TOP)
+    entryVirusDecayRate = settingEntry(rightFrame)
+    entryVirusDecayRate.variableName = "vaccine_efficacy"
+    entryVirusDecayRate.default = 0.75
+    entryVirusDecayRate.type = "decimal"
+    entryVirusDecayRate.pack(side = TOP)
+
     # define number infectious
     labelNumberInfectious = tkinter.Label(leftFrame, text = "Number Infectious")
     labelNumberInfectious.pack(side = TOP)
@@ -97,11 +106,20 @@ def settings(mainFrame, folderDirectory):
     entryNumberInfectious.type = "int"
     entryNumberInfectious.pack(side = TOP)
 
-    # define number susceptible
-    labelNumberSusceptible = tkinter.Label(leftFrame, text = "Number Susceptible")
+    # define number susceptible vaccinated
+    labelNumberSusceptible = tkinter.Label(leftFrame, text = "Number Susceptible Vaccinated")
     labelNumberSusceptible.pack(side = TOP)
     entryNumberSusceptible = settingEntry(rightFrame)
-    entryNumberSusceptible.variableName = "number_susceptible"
+    entryNumberSusceptible.variableName = "number_susceptible_vaccinated"
+    entryNumberSusceptible.default = 6
+    entryNumberSusceptible.type = "int"
+    entryNumberSusceptible.pack(side = TOP)
+
+    # define number susceptible unvaccinated
+    labelNumberSusceptible = tkinter.Label(leftFrame, text = "Number Susceptible Unvaccinated")
+    labelNumberSusceptible.pack(side = TOP)
+    entryNumberSusceptible = settingEntry(rightFrame)
+    entryNumberSusceptible.variableName = "number_susceptible_unvaccinated"
     entryNumberSusceptible.default = 6
     entryNumberSusceptible.type = "int"
     entryNumberSusceptible.pack(side = TOP)
@@ -141,6 +159,8 @@ def settings(mainFrame, folderDirectory):
     entryMidpointExposure.default = 50
     entryMidpointExposure.type = "int"
     entryMidpointExposure.pack(side = TOP)
+
+   
 
     #define error message
     labelErrorMessage = tkinter.Label(bottomFrame, text = "", fg = "#f00")
@@ -187,7 +207,7 @@ def settings(mainFrame, folderDirectory):
     # to be used when the window is opened
     def readSettings():
         # read settings file into a map
-        with open("./settings.json") as f:
+        with open(folderDirectory + "\\settings.json") as f:
             settingsIn = json.load(f)
         
         for entry in entries:
