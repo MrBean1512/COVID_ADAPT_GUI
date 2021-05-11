@@ -193,7 +193,7 @@ def settings(mainFrame, folderDirectory):
     # to be used when the window is opened
     def readSettings():
         # read settings file into a map
-        with open("./settings.json") as f:
+        with open(folderDirectory+"/settings.json") as f:
             settingsIn = json.load(f)
         
         for entry in entries:
