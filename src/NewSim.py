@@ -16,7 +16,7 @@ class settingEntry(tkinter.Entry):
         self.variableName = "unnamed"
         self.default = ""
 
-def newSim(mainFrame, leftFrame, rightFrame):
+def newSim(window, mainFrame, leftFrame, rightFrame):
 
     # main frame for the new sim function
     newSimFrame = tkinter.Frame(leftFrame)
@@ -84,7 +84,7 @@ def newSim(mainFrame, leftFrame, rightFrame):
 
         leftFrame.destroy()
         rightFrame.destroy()
-        Simulation.simulation(mainFrame, destination )
+        Simulation.simulation(window, mainFrame, destination)
 
     saveButton = tkinter.Button(bottomFrame, text = "Create New", command = createNewProject)
     saveButton.pack(side = LEFT)
