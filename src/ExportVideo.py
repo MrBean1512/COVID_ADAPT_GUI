@@ -138,6 +138,9 @@ def videoGen(dir):
 
     # cv2.imwrite('background.jpg', background)
 
+    # color matrix
+    personColor = [ [0,255,0], [255, 165, 0], [255, 0, 0], [0,0,255] ]
+
     people = pd.read_csv(dir+'people.csv')
     num_people = 10 # fix magic number from settings
     # totalTimes = int(np.sqrt(totalTimes))
@@ -166,7 +169,7 @@ def videoGen(dir):
             x = layout_x_0 + (c * tileSize)
             for i in range(int(tileSize * (0.25))+1, int(tileSize * (.75))):
                 for j in range(int(tileSize * (0.25)+1), int(tileSize * (.75))):
-                    img[y+i][x+j] = [0, 0, 0]
+                    img[y+i][x+j] = personColor[ people[' status'][n + (timeStep*num_people)] ]
 
         # cv2.imwrite('frame'+str(timeStep)+'.jpg', img)
         video.write(img)
