@@ -10,7 +10,7 @@ from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
 from tkinter.filedialog import askdirectory
 
-def welcome(mainFrame, window):
+def welcome(window, mainFrame):
 
     # ==========================================================
     # define the right frame
@@ -46,9 +46,19 @@ def welcome(mainFrame, window):
     leftFrame.pack_propagate(0)
     leftFrame.pack(side = LEFT)
 
+    openError = tkinter.Label(leftFrame, justify = LEFT, fg = '#FF0000', text = 
+    "Invalid Folder \n"
+    "Ensure that the folder you are trying to open \n"
+    "has valid 'layout.csv', 'COVID-ADAPT.exe',\n"
+    "and 'settings.json' files in it.\n"
+    "Otherwise click 'New Sim'\n")
+    openError.pack(side = BOTTOM)
+    openError.pack_forget()
+
     # define the new button's function
     def newSim():
-        NewSim.newSim(mainFrame, leftFrame, rightFrame)
+        openError.pack_forget()
+        NewSim.newSim(window, mainFrame, leftFrame, rightFrame)
 
     # define the open button's function
     def openSim():
@@ -56,11 +66,15 @@ def welcome(mainFrame, window):
         folder = askdirectory()
         #file = askdirectory(mode ='r', filetypes =[('Python Files', '*.txt')])
         if folder is not None:
-            leftFrame.destroy()
-            rightFrame.destroy()
-            print(folder)
-            Simulation.simulation(mainFrame, folder)
-
+            if (os.path.isfile(folder + "/layout.csv") & os.path.isfile(folder + "/COVID-ADAPT.exe") & os.path.isfile(folder + "/settings.json")):
+                leftFrame.destroy()
+                rightFrame.destroy()
+                print(folder)
+                Simulation.simulation(window, mainFrame, folder)
+            else:
+                openError.pack()
+        else:
+            openError.pack()
         
 
     # define the recent button's function
@@ -74,5 +88,7 @@ def welcome(mainFrame, window):
         ["Open Sim", openSim],
         ["Exit", exit],
     ]
+
+
 
     Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)

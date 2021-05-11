@@ -5,6 +5,7 @@ from tkinter.constants import *
 from tkinter.filedialog import askopenfile
 import json
 import Frame_Buttons
+import Graphs
 
 # subclass of Entry that holds the name of the variable in the settings file that the entry corresponds with
 class settingEntry(tkinter.Entry):
@@ -174,6 +175,11 @@ def settings(mainFrame, folderDirectory):
             outFile = open(folderDirectory + "\\settings.json", "w")
             outFile.write(json.dumps(settings, indent = 0))
             outFile.close()
+        
+        settingsFrame.destroy()
+        # TODO
+        # Replace the settings frame with the simulation data
+
 
     # define defaults button
     # default button sets all entries to default values and saves these new values to the settings file
@@ -194,9 +200,14 @@ def settings(mainFrame, folderDirectory):
             entry.delete(0, END)
             entry.insert(0, settingsIn[entry.variableName])
 
+    def cancel():
+        settingsFrame.destroy()
+        # TODO
+        # Replace the settings frame with the simulation data
+
     buttonSpecs = [
         #["name", function],
-        #["Return To Menu", tk.destroy],
+        ["Cancel", cancel],
         ["Save Settings", saveSettings],
         ["Set Default Values", setAsDefaults],
     ]

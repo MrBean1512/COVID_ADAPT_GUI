@@ -11,7 +11,7 @@ window.iconbitmap('./src/assets/covidAdaptLogo.ico')
 mainFrame = tk.Frame(window)
 mainFrame.pack()
 
-Welcome.welcome(mainFrame, window)
+Welcome.welcome(window, mainFrame)
 
 # display the tkinter window
 window.mainloop()
