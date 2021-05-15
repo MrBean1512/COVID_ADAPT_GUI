@@ -3,11 +3,14 @@ import tkinter.font
 import Welcome
 import Frame_Buttons
 import ExportVideo
+import Window_Space_Builder
 from tkinter.constants import * # used for formatting
 from tkinter.filedialog import askopenfile  # used to open a file
 import os   # used for running an exe
 import Settings
 from threading import Thread
+
+#from Window_Space_Builder import Window_Space_Builder
 # import subprocess
 
 def simulation(window, mainFrame, folderDirectory):
@@ -64,12 +67,16 @@ def simulation(window, mainFrame, folderDirectory):
         rightFrame.destroy()
         Welcome.welcome(window, mainFrame)
 
+    def edit():
+        Window_Space_Builder.Window_Space_Builder(mainFrame, folderDirectory)
+
     buttonSpecs = [
         #["name", function],
         ["Run Simulation", run], #TODO change function to threadRun once multithreading is fully functional
         ["Export", export],
         ["Settings", settings],
         ["Return to Menu", exit],
+        ["Edit Space", edit]
     ]
 
     Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)
