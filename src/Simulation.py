@@ -40,10 +40,12 @@ def simulation(window, mainFrame, folderDirectory):
 
     # define the new button
     def run():
-#        title.config(text = "Run Simulation")
+        #title.config(text = "Run Simulation")
+        mainWDir = os.getcwd()
         os.chdir(folderDirectory)
         print("working directory updated\nrunning simulation...")
         os.system(folderDirectory + '/COVID-ADAPT.exe')
+        os.chdir(mainWDir)
         print("Done Running")
         # subprocess.run(folderDirectory + '/COVID-ADAPT.exe', capture_output=True)
 
