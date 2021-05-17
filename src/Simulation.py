@@ -42,7 +42,7 @@ def simulation(window, mainFrame, folderDirectory):
         os.system(folderDirectory + '/COVID-ADAPT.exe')
         os.chdir(mainWDir)
         print("Done Running. \nGenerating images...")
-        Graphs.makeGraphs()
+        Graphs.makeGraphs(folderDirectory)
         # destroy all widgets from frame
         for widget in rightFrame.winfo_children():
             widget.destroy()

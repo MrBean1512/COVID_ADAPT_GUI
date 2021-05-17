@@ -100,7 +100,7 @@ def makeGraphs(dir):
     people_status_df = pd.DataFrame(people_raw_df[' status'].values.reshape(-1, 10), columns=['p0','p1','p2','p3','p4','p5','p6','p7','p8','p9'])
     people_df = pd.concat([people_times_df, people_status_df], axis=1) #recombine the two dfs
 
-    print("begining graph generation")
+    print("beginning graph generation")
     graphTotalVirus(virus_levels_df, dir)
     graphMeanVirus(virus_levels_df, dir)
     graphIncidence(people_df, dir)
