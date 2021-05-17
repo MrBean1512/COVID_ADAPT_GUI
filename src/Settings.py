@@ -15,8 +15,11 @@ class settingEntry(tkinter.Entry):
         self.default = ""
         self.type = int
 
-def settings(mainFrame, folderDirectory):
-    settingsFrame = tkinter.Frame(mainFrame)
+def settings(parentFrame, folderDirectory):
+    #settingsFrame = tkinter.Tk()
+    #settingsFrame.title("Settings")
+
+    settingsFrame = tkinter.Frame(parentFrame)
     settingsFrame.pack(side = RIGHT)
 
     # top frame holds left and right frames
@@ -161,8 +164,6 @@ def settings(mainFrame, folderDirectory):
     entryMidpointExposure.type = "int"
     entryMidpointExposure.pack(side = TOP)
 
-   
-
     #define error message
     labelErrorMessage = tkinter.Label(bottomFrame, text = "", fg = "#f00")
     labelErrorMessage.pack(side = TOP)
@@ -197,8 +198,7 @@ def settings(mainFrame, folderDirectory):
             outFile.close()
         
         settingsFrame.destroy()
-        # TODO
-        # Replace the settings frame with the simulation data
+        Graphs.graphFrame(parentFrame, folderDirectory)
 
 
     # define defaults button
@@ -222,8 +222,7 @@ def settings(mainFrame, folderDirectory):
 
     def cancel():
         settingsFrame.destroy()
-        # TODO
-        # Replace the settings frame with the simulation data
+        Graphs.graphFrame(parentFrame, folderDirectory)
 
     buttonSpecs = [
         #["name", function],

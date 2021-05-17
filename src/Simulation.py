@@ -1,11 +1,14 @@
-import tkinter
-import tkinter.font
 import Welcome
 import Frame_Buttons
 import ExportVideo
 import Window_Space_Builder
+import Graphs
+
+import tkinter
+import tkinter.font
 from tkinter.constants import * # used for formatting
 from tkinter.filedialog import askopenfile  # used to open a file
+
 import os   # used for running an exe
 import Settings
 from threading import Thread
@@ -15,13 +18,6 @@ from threading import Thread
 
 def simulation(window, mainFrame, folderDirectory):
 
-    # define the main frame/window
-    #window = tkinter.Frame(parent, relief=RIDGE, borderwidth=2)
-    #window.pack(fill=BOTH, expand=1)
-
-    #tk = tkinter.Tk()
-    #tk.title("COVID ADAPT")
-
     # ==========================================================
     # define the right frame
     # this is where information is displayed
@@ -29,8 +25,7 @@ def simulation(window, mainFrame, folderDirectory):
     rightFrame.pack(side = RIGHT)
 
     # define the Title label
-    title = tkinter.Label(rightFrame, text = "Get Started")
-    title.pack(fill = X, expand = 1)
+    Graphs.graphFrame(rightFrame, folderDirectory)
 
     # ==========================================================
     # define the left frame
@@ -46,22 +41,30 @@ def simulation(window, mainFrame, folderDirectory):
         print("working directory updated\nrunning simulation...")
         os.system(folderDirectory + '/COVID-ADAPT.exe')
         os.chdir(mainWDir)
-        print("Done Running")
+        print("Done Running. \nGenerating images...")
+        Graphs.makeGraphs()
+        # destroy all widgets from frame
+        for widget in rightFrame.winfo_children():
+            widget.destroy()
+        Graphs.graphFrame(rightFrame, folderDirectory)
+        print("Done generating graphs.")
         # subprocess.run(folderDirectory + '/COVID-ADAPT.exe', capture_output=True)
 
+    # use this to run the simulation on another thread
+    # WARNING: this is not used because it creates a few dangerous issues
     def threadRun():
         t1 = Thread(target = run)
         t1.start()
 
     # define the open button
     def export():
-        title.config(text = "Export")
         ExportVideo.videoGen(folderDirectory)
 
     # define the recent button
     def settings():
-        rightFrame.destroy()
-        Settings.settings(mainFrame, folderDirectory)
+        for widget in rightFrame.winfo_children():
+            widget.destroy()
+        Settings.settings(rightFrame, folderDirectory)
 
     # define the recent button
     def exit():
@@ -78,7 +81,7 @@ def simulation(window, mainFrame, folderDirectory):
         ["Export", export],
         ["Settings", settings],
         ["Return to Menu", exit],
-        ["Edit Space", edit]
+        ["Edit Space (Experimental)", edit]
     ]
 
     Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)

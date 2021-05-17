@@ -20,11 +20,11 @@ def welcome(window, mainFrame):
 
     # define the Paragraph label
     paragraph = tkinter.Label(rightFrame, justify = LEFT, text = 
-    "Lorem ipsum dolor sit amet, consectetur \n"
-    "adipiscing elit. Integer vel lacinia \n"
-    "metus. Integer nec feugiat odio. Sed eget\n"
-    "interdum mauris, sed tincidunt erat. Nunc\n"
-    "consequat orci non mi luctus, ut vehicula.\n")
+    "Covid-Adapt is designed to simulate how covid \n"
+    "or similar airborn viruses might spread in a \n"
+    "given space. Press 'new simulation to get started \n"
+    "or open an existing save. If covid-adapt.exe has\n"
+    "has recently been updated, old saves will not be updated.\n")
     paragraph.pack(side = BOTTOM)
 
     # define the Title label
@@ -81,14 +81,11 @@ def welcome(window, mainFrame):
     def exit():
         window.destroy()
 
-
     buttonSpecs = [
         #["name", function],
         ["New Sim", newSim],
         ["Open Sim", openSim],
         ["Exit", exit],
     ]
-
-
 
     Frame_Buttons.buttonBuilder(leftFrame, buttonSpecs)
