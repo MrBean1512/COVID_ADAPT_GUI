@@ -13,7 +13,7 @@ def graphFrame(rightFrame, dir):
     if (os.path.isfile(dir + "/graphTotalVirus.png") 
     & os.path.isfile(dir + "/graphMeanVirus.png") 
     & os.path.isfile(dir + "/graphIncidence.png")
-    & os.path.isfile(dir + "/graphPrevelence.png")):
+    & os.path.isfile(dir + "/graphPrevalence.png")):
         imgFile = Image.open(dir + "\\graphTotalVirus.png")
         imgFile = imgFile.resize((300,300))
         render = ImageTk.PhotoImage(imgFile)
@@ -47,8 +47,8 @@ def graphFrame(rightFrame, dir):
             img.configure(image = render)
             img.image = render
 
-        def prevelenceButton():
-            imgFile = Image.open(dir + "\\graphPrevelence.png")
+        def prevalenceButton():
+            imgFile = Image.open(dir + "\\graphPrevalence.png")
             imgFile = imgFile.resize((300,300))
             render = ImageTk.PhotoImage(imgFile)
             img.configure(image = render)
@@ -59,7 +59,7 @@ def graphFrame(rightFrame, dir):
             ["Total Virus", totalVirusButton],
             ["Mean Virus", meanVirusButton],
             ["Incidence", incidenceButton],
-            ["Prevelence", prevelenceButton],
+            ["Prevalence", prevalenceButton],
         ]
 
         Frame_Buttons.buttonBuilder(graphButtons, buttonSpecs)
@@ -104,7 +104,7 @@ def makeGraphs(dir):
     graphTotalVirus(virus_levels_df, dir)
     graphMeanVirus(virus_levels_df, dir)
     graphIncidence(people_df, dir)
-    graphPrevelence(people_df, dir)
+    graphPrevalence(people_df, dir)
     print("done generating images")
 
 def graphTotalVirus(virus_levels_df:pd.DataFrame, dir:str):
@@ -135,11 +135,11 @@ def graphIncidence(people_df:pd.DataFrame, dir:str):
     fig.tight_layout()
     fig.savefig(dir+"\\graphIncidence.png")
     
-def graphPrevelence(people_df:pd.DataFrame, dir:str):
-    people_df["prevelence"] = people_df.iloc[:,1:].apply(lambda row: sum(row[1:]==2) + sum(row[1:]==3) ,axis=1)
+def graphPrevalence(people_df:pd.DataFrame, dir:str):
+    people_df["prevalence"] = people_df.iloc[:,1:].apply(lambda row: sum(row[1:]==2) + sum(row[1:]==3) ,axis=1)
     fig, ax = plt.subplots()
-    ax.plot(people_df['time'], people_df["prevelence"])
+    ax.plot(people_df['time'], people_df["prevalence"])
     ax.set_xlabel("Time (minutes)")
-    ax.set_ylabel("Prevelence")
+    ax.set_ylabel("Prevalence")
     fig.tight_layout()
-    fig.savefig(dir+"\\graphPrevelence.png")
+    fig.savefig(dir+"\\graphPrevalence.png")
