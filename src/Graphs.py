@@ -6,6 +6,7 @@ import tkinter
 from tkinter.constants import *
 from PIL import Image, ImageTk
 import Frame_Buttons
+from Settings import settings
 
 def graphFrame(rightFrame, dir):
 
@@ -101,11 +102,14 @@ def makeGraphs(dir):
     people_df = pd.concat([people_times_df, people_status_df], axis=1) #recombine the two dfs
 
     print("beginning graph generation")
-    graphTotalVirus(virus_levels_df, dir)
-    graphMeanVirus(virus_levels_df, dir)
-    graphIncidence(people_df, dir)
-    graphPrevalence(people_df, dir)
+    virus_levels_df = graphTotalVirus(virus_levels_df, dir)
+    virus_levels_df = graphMeanVirus(virus_levels_df, dir)
+    people_df = graphIncidence(people_df, dir)
+    people_df = graphPrevalence(people_df, dir)
+    people_df["total_virus"] = virus_levels_df["total_virus"]
+    people_df["mean_virus"] = virus_levels_df["mean_virus"]
     print("done generating images")
+    people_df.to_csv(dir + "\\graphData.csv")
 
 def graphTotalVirus(virus_levels_df:pd.DataFrame, dir:str):
     virus_levels_df["total_virus"] = virus_levels_df.iloc[:,1:].sum(axis=1)
@@ -115,6 +119,7 @@ def graphTotalVirus(virus_levels_df:pd.DataFrame, dir:str):
     ax.set_ylabel("Total virus level")
     fig.tight_layout()
     fig.savefig(dir+"\\graphTotalVirus.png")
+    return virus_levels_df
 
 
 def graphMeanVirus(virus_levels_df:pd.DataFrame, dir:str):
@@ -125,6 +130,7 @@ def graphMeanVirus(virus_levels_df:pd.DataFrame, dir:str):
     ax.set_ylabel("Mean virus level")
     fig.tight_layout()
     fig.savefig(dir+"\\graphMeanVirus.png")
+    return virus_levels_df
     
 def graphIncidence(people_df:pd.DataFrame, dir:str):
     people_df["incidence"] = people_df.iloc[:,1:].apply(lambda row: sum(row[1:]==2) ,axis=1)
@@ -134,6 +140,7 @@ def graphIncidence(people_df:pd.DataFrame, dir:str):
     ax.set_ylabel("Incidence")
     fig.tight_layout()
     fig.savefig(dir+"\\graphIncidence.png")
+    return people_df
     
 def graphPrevalence(people_df:pd.DataFrame, dir:str):
     people_df["prevalence"] = people_df.iloc[:,1:].apply(lambda row: sum(row[1:]==2) + sum(row[1:]==3) ,axis=1)
@@ -143,3 +150,4 @@ def graphPrevalence(people_df:pd.DataFrame, dir:str):
     ax.set_ylabel("Prevalence")
     fig.tight_layout()
     fig.savefig(dir+"\\graphPrevalence.png")
+    return people_df
